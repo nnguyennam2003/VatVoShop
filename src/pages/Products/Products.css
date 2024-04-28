@@ -1,0 +1,19 @@
+.products {
+  margin-bottom: 100px;
+}
+
+.products h1 {
+  text-align: center;
+  margin-top: 8rem;
+  font-size: 3rem;
+}
+
+.prod-wrapper {
+  max-width: 1400px;
+  margin: 32px auto 0 auto;
+  padding: 0 32px;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  column-gap: 2rem;
+  row-gap: 3rem;
+}

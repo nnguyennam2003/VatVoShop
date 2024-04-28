@@ -1,0 +1,83 @@
+.banner-home {
+  width: 100%;
+  height: 476px;
+  position: relative;
+}
+
+.banner-home img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.social {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.social ul {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.social ul li i {
+  font-size: 20px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.title-plus {
+    text-align: center;
+    padding: 0 32px;
+    margin: 96px auto 0 auto;
+}
+
+.title-plus h1 {
+    font-size: 3rem;
+    margin-bottom: 20px;
+}
+
+.title-plus p {
+    font-size: 17px;
+    line-height: 26px;
+   letter-spacing: 0.2px;
+}
+
+.prod-plus {
+  max-width: 1400px;
+  margin: 96px auto 96px auto;
+  padding: 0 32px;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 4rem;
+}
+
+.prod-ultra {
+  max-width: 1400px;
+  margin: 96px auto 96px auto;
+  padding: 0 32px;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 4rem;
+}
+
+.title-ultra {
+  text-align: center;
+  padding: 0 32px;
+  margin: 96px auto 0 auto;
+}
+
+.title-ultra h1 {
+  font-size: 3rem;
+  margin-bottom: 20px;
+}
+
+.title-ultra p {
+  font-size: 17px;
+  line-height: 26px;
+ letter-spacing: 0.2px;
+}

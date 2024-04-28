@@ -1,0 +1,43 @@
+.product {
+    text-align: center;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.prod-img {
+    width: 100%;
+    border-radius: 10px;
+    overflow: hidden;
+    transition: .2s ease;
+}
+
+.prod-img img:hover  {
+    border: 1px #0c0c0c solid;
+}
+
+.prod-img img {
+    width: 100%;
+    border-radius: 10px;
+}
+
+.prod-name {
+    font-size: 1.40rem;
+    font-weight: 700;
+}
+
+.new-price {
+    font-size: 1.30rem;
+    font-weight: 400;
+    color: #0c0c0c;
+    letter-spacing: 0.7px;
+}
+
+.old-price {
+    font-size: 1.10rem;
+    color: #858585;
+    text-decoration: line-through;
+    letter-spacing: 0.7px;
+    margin-left: 5px;
+}

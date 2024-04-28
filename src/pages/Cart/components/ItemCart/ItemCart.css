@@ -1,0 +1,101 @@
+.item-cart {
+    display: flex;
+    align-items: center;
+    padding: 16px 0;
+    border-bottom: 1px solid #0c0c0c;
+}
+
+.item-cart>button {
+    margin-right: 1rem;
+    cursor: pointer;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: transparent;
+    border: 2px solid #0c0c0c;
+    border-radius: 50%;
+    transition: .2s;
+}
+
+.item-cart>button:hover {
+    background: #0c0c0c;
+    color: #FFF;
+}
+
+.item-cart>button i {
+    font-size: 1.6rem;
+}
+
+.item-cart-img {
+    width: 120px;
+    margin-right: 16px;
+}
+
+.item-cart-img img {
+    width: 100%;
+    border-radius: 10px;
+}
+
+.item-cart-info {
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.item-cart-info h3 {
+    font-size: 1.6rem;
+}
+
+.item-cart-info span {
+    font-size: 1.1rem;
+}
+
+.item-cart-quantity {
+    flex: 0 0 180px;
+}
+
+.action-quantity {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.action-quantity button {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: transparent;
+    border: 2px solid #0c0c0c;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: .2s;
+}
+
+.action-quantity button:hover {
+    background: #0c0c0c;
+    color: #FFF;
+}
+
+.action-quantity button i {
+    font-size: 1.6rem;
+}
+
+.quantity {
+    font-size: 1.2rem;
+}
+
+.item-cart-price {
+    flex: 0 0 180px;
+    font-size: 1.4rem;
+}
+
+.item-cart-total {
+    flex: 0 0 180px;
+    text-align: right;
+    font-size: 1.4rem;
+}
