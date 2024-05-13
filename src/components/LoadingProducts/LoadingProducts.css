@@ -1,0 +1,16 @@
+.loadingProducts {
+  max-width: 1400px;
+  margin: 32px auto 0 auto;
+  padding: 0 32px;
+  display: grid;
+  grid-template-columns: repeat(4, 310px);
+  column-gap: 2rem;
+  row-gap: 3rem;
+}
+
+.item-loadingProducts {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}

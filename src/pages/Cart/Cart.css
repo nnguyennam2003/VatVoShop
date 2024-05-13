@@ -94,3 +94,32 @@
 .actions-cart button:last-child:hover {
     opacity: 0.8;
 }
+
+.cart-empty {
+    height: 50vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+}
+
+.cart-empty p {
+    font-size: 2.2rem;
+    font-weight: 700;
+}
+
+.cart-empty button {
+    font-size: 1.4rem;
+    font-weight: 600;
+    border: none;
+    border-radius: 30px;
+    padding: 12px 24px;
+    background: #4FED66;
+    cursor:  pointer;
+    transition: .2s;
+}
+
+.cart-empty button:hover {
+    opacity: 0.8;
+}

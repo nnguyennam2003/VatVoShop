@@ -1,17 +1,40 @@
 import React, { useState } from "react";
 import "./ProductInfo.css";
-import Loading from "../Loading";
+import LoadingProductInfo from "../LoadingProductInfo";
 import { useDispatch } from 'react-redux'
 import { addToCart } from "../../redux/slice/cartSlice";
+import AlertSweet from "./components/AlertSweet";
 
 function ProductInfo({ productInfo }) {
   const [activeSize, setActiveSize] = useState('S')
   const [size, setSize] = useState("S")
+  const [alertSweet, setAlertSweet] = useState(false)
   const dispatch = useDispatch()
 
   const handlePickSize = (sizeSelect) => {
     setActiveSize(sizeSelect)
     setSize(sizeSelect)
+  }
+
+  const handleAddToCart = () => {
+    dispatch(addToCart(productInfo))
+    setAlertSweet(true)
+  }
+
+  const handleClose = () => {
+    setAlertSweet(false)
+  }
+
+  const formatNewPrice = (price) => {
+    const priceProduct = productInfo.new_price;
+    // Sử dụng phương thức replace để thêm dấu chấm hàng nghìn
+    return priceProduct.replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+  }
+
+  const formatOldPrice = (price) => {
+    const priceProduct = productInfo.old_price;
+    // Sử dụng phương thức replace để thêm dấu chấm hàng nghìn
+    return priceProduct.replace(/\B(?=(\d{3})+(?!\d))/g, ".");
   }
 
   return (
@@ -25,8 +48,8 @@ function ProductInfo({ productInfo }) {
           <div className="product-info-text">
             <h1>{productInfo.name}</h1>
             <div className="product-info-text-price">
-              <p>{productInfo.new_price}₫</p>
-              <span>{productInfo.old_price}₫</span>
+              <p>{formatNewPrice(productInfo.new_price)}₫</p>
+              <span>{formatOldPrice(productInfo.old_price)}₫</span>
             </div>
 
             <p>Sẵn sàng gửi trong 2 - 3 ngày tới</p>
@@ -50,11 +73,12 @@ function ProductInfo({ productInfo }) {
               <button><i className="bx bx-plus"></i></button>
             </div>
 
-            <button className="add-to-cart-btn" onClick={() => dispatch(addToCart(productInfo))} >THÊM VÀO GIỎ HÀNG</button>
+            <button className="add-to-cart-btn" onClick={() => handleAddToCart()} >THÊM VÀO GIỎ HÀNG</button>
+            {alertSweet && (<AlertSweet onclose={handleClose}/>)}
           </div>
         </div>
       ) : (
-        <Loading />
+        <LoadingProductInfo />
       )}
     </>
   );

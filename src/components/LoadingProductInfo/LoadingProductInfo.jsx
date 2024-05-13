@@ -1,8 +1,8 @@
 import React from "react";
-import { Skeleton} from "antd";
-import './loading.css'
+import { Skeleton } from "antd";
+import './LoadingProductInfo.css'
 
-function Loading(props) {
+function LoadingProductInfo(props) {
   return (
     <div className="loading">
       <Skeleton.Image active style={{ width: "668px", height: "500px" }} />
@@ -11,4 +11,4 @@ function Loading(props) {
   );
 }
 
-export default Loading;
+export default LoadingProductInfo;

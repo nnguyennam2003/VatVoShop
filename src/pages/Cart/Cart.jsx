@@ -2,48 +2,84 @@ import React from "react";
 import "./Cart.css";
 import ItemCart from "./components/ItemCart";
 import { useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
-
+import { useDispatch, useSelector } from "react-redux";
+import { removeToCart } from "../../redux/slice/cartSlice";
 
 function Cart() {
-  const navigate = useNavigate()
-  const cartProductSelector = useSelector(state => state.cart.ListCart)
+  const navigate = useNavigate();
+  const cartProductSelector = useSelector((state) => state.cart.ListCart);
+  const dispatch = useDispatch();
+
+  const handleRemoveFromCart = (productId) => {
+    // Gửi thông tin sản phẩm cần xóa đến reducer
+    dispatch(removeToCart({ id: productId }));
+  };
+
+  const calculateTotalPrice = () => {
+    let totalPrice = 0;
+    cartProductSelector.forEach((product) => {
+      totalPrice += parseInt(product.new_price) * product.quantity;
+    });
+    return  totalPrice.toLocaleString('vi-VN');
+  };
 
   return (
     <div className="cart">
-      <div className="title-cart">
-        <h2>
-          <span>{cartProductSelector.length}</span> sản phẩm trong giỏ hàng
-        </h2>
-      </div>
-      <div className="table-cart">
-        <div className="column-name">
-          <div className="col1">Sản phẩm</div>
-          <div className="col2">Số lượng</div>
-          <div className="col3">Giá</div>
-          <div className="col4">Tổng tiền</div>
+      {cartProductSelector.length > 0 && (
+        <div className="title-cart">
+          <h2>
+            <span>{cartProductSelector.length}</span> sản phẩm trong giỏ hàng
+          </h2>
         </div>
-
-        {/* danh sách giở hàng */}
-        <div className="list-cart">
-          {cartProductSelector.map((item, index) => (
-            <ItemCart key={index} image={item.image} name={item.name} price={item.new_price} quantity={item.quantity}/>
-          ))}
-          
+      )}
+      {cartProductSelector.length > 0 && (
+        <div className="table-cart">
+          <div className="column-name">
+            <div className="col1">Sản phẩm</div>
+            <div className="col2">Số lượng</div>
+            <div className="col3">Giá</div>
+            <div className="col4">Tổng tiền</div>
+          </div>
         </div>
+      )}
+
+      <div className="list-cart">
+        {cartProductSelector.length === 0 ? (
+          <div className="cart-empty">
+            <p>Không có sản phẩm trong giỏ hàng</p>
+            <button onClick={() => navigate('/products')}>Bắt đầu mua hàng</button>
+          </div>
+        ) : (
+          cartProductSelector.map((item, index) => (
+            <ItemCart
+              key={index}
+              image={item.image}
+              name={item.name}
+              price={item.new_price}
+              quantity={item.quantity}
+              onRemove={() => handleRemoveFromCart(item.id)}
+            />
+          ))
+        )}
       </div>
 
-      <div className="price-total-cart">
-        <div className="text-price-total-cart">
-          <strong>Tổng tiền</strong>
-          <strong>249.000₫</strong>
+      {cartProductSelector.length > 0 && (
+        <div className="price-total-cart">
+          <div className="text-price-total-cart">
+            <strong>Tổng tiền</strong>
+            <strong>{calculateTotalPrice()}₫</strong>
+          </div>
         </div>
-      </div>
+      )}
 
-      <div className="actions-cart">
-        <button onClick={() => navigate('/products')}>Tiếp tục mua hàng</button>
-        <button>Thanh toán</button>
-      </div>
+      {cartProductSelector.length > 0 && (
+        <div className="actions-cart">
+          <button onClick={() => navigate("/products")}>
+            Tiếp tục mua hàng
+          </button>
+          <button>Thanh toán</button>
+        </div>
+      )}
     </div>
   );
 }
