@@ -47,7 +47,7 @@ function Footer(props) {
       </div>
       <div className="scroll-up">
         <button onClick={handleScrollUp}>
-          <i class="bx bx-up-arrow-alt"></i>{" "}
+          <i className="bx bx-up-arrow-alt"></i>{" "}
         </button>
       </div>
     </div>

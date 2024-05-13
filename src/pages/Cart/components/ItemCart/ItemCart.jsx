@@ -1,34 +1,34 @@
 import React from 'react';
 import './ItemCart.css'
-import img_cart from "../../../../assets/images/img-cart.webp"
 
-function ItemCart(props) {
+function ItemCart({ image, name, price, quantity}) {
+
     return (
         <div className="item-cart">
             <button>
-              <i class="bx bx-x"></i>
+              <i className="bx bx-x"></i>
             </button>
 
             <div className="item-cart-img">
-              <img src={img_cart} alt="" />
+              <img src={image} alt="" />
             </div>
             <div className="item-cart-info">
-              <h3>Áo thun Work-hard Play-hard (Trắng) | Plus</h3>
+              <h3>{name}</h3>
               <span>Trắng,S</span>
             </div>
             <div className="item-cart-quantity">
               <div className="action-quantity">
                 <button>
-                  <i class="bx bx-minus"></i>
+                  <i className="bx bx-minus"></i>
                 </button>
-                <p className="quantity">1</p>
+                <p className="quantity">{quantity}</p>
                 <button>
-                  <i class="bx bx-plus"></i>
+                  <i className="bx bx-plus"></i>
                 </button>
               </div>
             </div>
-            <div className="item-cart-price">249.000₫</div>
-            <div className="item-cart-total">249.000₫</div>
+            <div className="item-cart-price">{price}₫</div>
+            <div className="item-cart-total">{price}₫</div>
           </div>
     );
 }

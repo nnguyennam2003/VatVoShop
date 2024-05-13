@@ -7,16 +7,9 @@ import Tutorial from "./pages/Tutorial";
 import Footer from "./components/Footer";
 import Products from "./pages/Products";
 import Cart from "./pages/Cart";
+import ProductDetail from "./pages/ProductDetail";
 
 function App() {
-  // const [apiText, setApiText] = useState(""); // State để lưu trữ đoạn văn bản từ API
-
-  // useEffect(() => {
-  //   // Giả sử bạn đã fetch đoạn văn bản từ API và set nó vào state apiText
-  //   const fetchedText =
-  //     "Áo thun Only (i)Fans thiết kế dành cho các anh em fan Apple với logo quả táo cắn dở quen thuộc cùng sự xuất hiện của các danh lam thắng cảnh Việt Nam.";
-  //   setApiText(fetchedText);
-  // }, []);
   return (
     <div className="App">
       <Header />
@@ -26,17 +19,12 @@ function App() {
           <Route path="/tutorial" element={<Tutorial />} />
           <Route path="/products" element={<Products />} />
           <Route path="/cart" element={<Cart />} />
+          <Route path="/productDetail/:productDetailId" element={<ProductDetail />} />
         </Routes>
       </div>
       <Footer />
     </div>
-    // <div className="container">
-    //   <div className="description">
-    //     {/* Sử dụng CSS để áp dụng kiểu in đậm cho các từ cụ thể */}
-    //     <span className="bold-text">Áo thun</span>
-    //     {apiText.replace("Áo thun Only (i)Fans", "")}
-    //   </div>
-    // </div>
+
   );
 }
 

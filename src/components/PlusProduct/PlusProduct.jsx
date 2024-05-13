@@ -1,17 +1,20 @@
 import React from "react";
 import "./PlusProduct.css";
+import { Link } from "react-router-dom";
 
-function PlusProduct({ name, newPrice, oldPrice, image }) {
+function PlusProduct({ id, name, newPrice, oldPrice, image }) {
   return (
-    <div className="plusProduct">
-      <div className="plus-img">
-        <img src={image} alt="Ảnh sản phẩm" />
+    <Link to={`/productDetail/${id}`} style={{ textDecoration: "none" }}>
+      <div className="plusProduct">
+        <div className="plus-img">
+          <img src={image} alt="Ảnh sản phẩm" />
+        </div>
+        <p className="plus-name">{name}</p>
+        <p className="plus-new-price">
+          {newPrice}₫ <span className="plus-old-price">{oldPrice}₫</span>
+        </p>
       </div>
-      <p className="plus-name">{name}</p>
-      <p className="plus-new-price">
-        {newPrice}₫ <span className="plus-old-price">{oldPrice}₫</span>
-      </p>
-    </div>
+    </Link>
   );
 }
 

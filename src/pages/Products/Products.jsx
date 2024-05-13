@@ -27,6 +27,7 @@ function Products(props) {
         {productData.map((prod, index) => (
           <Product
             key={index}
+            id={prod.id}
             name={prod.name}
             newPrice={prod.new_price}
             oldPrice={prod.old_price}

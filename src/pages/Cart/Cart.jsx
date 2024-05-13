@@ -2,15 +2,18 @@ import React from "react";
 import "./Cart.css";
 import ItemCart from "./components/ItemCart";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
-function Cart(props) {
+
+function Cart() {
   const navigate = useNavigate()
+  const cartProductSelector = useSelector(state => state.cart.ListCart)
 
   return (
     <div className="cart">
       <div className="title-cart">
         <h2>
-          <span>3</span> sản phẩm trong giỏ hàng
+          <span>{cartProductSelector.length}</span> sản phẩm trong giỏ hàng
         </h2>
       </div>
       <div className="table-cart">
@@ -23,9 +26,10 @@ function Cart(props) {
 
         {/* danh sách giở hàng */}
         <div className="list-cart">
-          <ItemCart />
-          <ItemCart />
-          <ItemCart />
+          {cartProductSelector.map((item, index) => (
+            <ItemCart key={index} image={item.image} name={item.name} price={item.new_price} quantity={item.quantity}/>
+          ))}
+          
         </div>
       </div>
 

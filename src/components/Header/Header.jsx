@@ -2,8 +2,12 @@ import React from 'react';
 import './Header.css'
 import logo from '../../assets/images/logo.png'
 import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
-function Header(props) {
+function Header() {
+
+    const cartProductSelector = useSelector(state => state.cart.ListCart)
+    
     return (
         <div className='header'>
             <ul className='pages-header'>
@@ -15,7 +19,7 @@ function Header(props) {
                 <Link to={'/'} className='logo-url'><img src={logo} alt="logo" width='100px'/></Link>
             </div>
             <div className='cart-header'>
-                <Link to={'/cart'} style={{textDecoration: 'none', color: '#0c0c0c'}}><li to='/cart'>GIỎ HÀNG <span>0</span></li></Link>
+                <Link to={'/cart'} style={{textDecoration: 'none', color: '#0c0c0c'}}><li to='/cart'>GIỎ HÀNG <span>{cartProductSelector.length}</span></li></Link>
             </div>
         </div>
     );

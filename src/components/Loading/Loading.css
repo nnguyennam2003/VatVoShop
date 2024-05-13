@@ -1,0 +1,8 @@
+.loading {
+    max-width: 1400px;
+    margin: 160px auto 96px auto;
+    padding: 0 32px;
+    display: flex;
+    gap: 80px;
+}
+

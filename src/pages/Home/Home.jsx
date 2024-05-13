@@ -14,7 +14,7 @@ function Home(props) {
   const fetchDataPlusProduct = async () => {
     try {
       const res = await getPlusProduct();
-      console.log(res);
+      // console.log(res);
       setPlusProduct(res);
     } catch (err) {
       console.error(err);
@@ -24,7 +24,7 @@ function Home(props) {
   const fetchDataUltraProduct = async () => {
     try {
       const res = await getUltraProduct();
-      console.log(res);
+      // console.log(res);
       setUltraProduct(res);
     } catch (err) {
       console.error(err);
@@ -43,16 +43,16 @@ function Home(props) {
         <div className="social">
           <ul>
             <li>
-              <i class="bx bxl-youtube"></i>
+              <i className="bx bxl-youtube"></i>
             </li>
             <li>
-              <i class="bx bxl-facebook"></i>
+              <i className="bx bxl-facebook"></i>
             </li>
             <li>
-              <i class="bx bxl-instagram-alt"></i>
+              <i className="bx bxl-instagram-alt"></i>
             </li>
             <li>
-              <i class="bx bxl-tiktok"></i>
+              <i className="bx bxl-tiktok"></i>
             </li>
           </ul>
         </div>
@@ -78,6 +78,7 @@ function Home(props) {
         {plusProduct.map((plus, index) => (
           <PlusProduct
             key={index}
+            id={plus.id}
             name={plus.name}
             newPrice={plus.new_price}
             oldPrice={plus.old_price}
@@ -113,6 +114,7 @@ function Home(props) {
         {ultraProduct.map((ultra, index) => (
           <UltraProduct
             key={index}
+            id={ultra.id}
             name={ultra.name}
             newPrice={ultra.new_price}
             oldPrice={ultra.old_price}
