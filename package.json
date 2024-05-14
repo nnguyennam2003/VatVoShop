@@ -20,7 +20,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "start-server": "json-server --watch data/db.json -p 8000",
+    "server": "json-server --watch data/db.json -p 8000",
     "start-dev": "concurrently \"json-server --watch data/db.json -p 8000\" \"react-scripts start\"",
     "build": "react-scripts build",
     "test": "react-scripts test",
