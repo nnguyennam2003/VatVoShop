@@ -7,7 +7,7 @@
 
 .product-info-img {
     width: 668px;
-    height: auto;
+    min-height: auto;
 }
 
 .product-info-img img {

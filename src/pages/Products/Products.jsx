@@ -5,6 +5,10 @@ import Product from "../../components/Product";
 import LoadingProducts from "../../components/LoadingProducts";
 
 function Products(props) {
+  useEffect(() => {
+    document.title = 'Tất cả sản phẩm - Vật Vờ Shop'
+  }, [])
+
   const [productData, setProductData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 

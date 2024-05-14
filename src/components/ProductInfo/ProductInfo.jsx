@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./ProductInfo.css";
 import LoadingProductInfo from "../LoadingProductInfo";
 import { useDispatch } from 'react-redux'
@@ -6,8 +6,15 @@ import { addToCart } from "../../redux/slice/cartSlice";
 import AlertSweet from "./components/AlertSweet";
 
 function ProductInfo({ productInfo }) {
+  useEffect(() => {
+    if (productInfo) {
+      document.title = `${productInfo.name}`
+    }
+  }, [productInfo])
+
   const [activeSize, setActiveSize] = useState('S')
   const [size, setSize] = useState("S")
+  const [quantity, setQuantity] = useState(1)
   const [alertSweet, setAlertSweet] = useState(false)
   const dispatch = useDispatch()
 
@@ -17,7 +24,7 @@ function ProductInfo({ productInfo }) {
   }
 
   const handleAddToCart = () => {
-    dispatch(addToCart(productInfo))
+    dispatch(addToCart({...productInfo, quantity: quantity, size: size}))
     setAlertSweet(true)
   }
 
@@ -25,14 +32,26 @@ function ProductInfo({ productInfo }) {
     setAlertSweet(false)
   }
 
+  const handleIncrementQuantity = () => {
+    setQuantity(quantity + 1);
+
+  }
+
+  const handleDecrementQuantity = () => {
+    if (quantity > 1) {
+      setQuantity(quantity - 1);
+    }
+  };
+
+
   const formatNewPrice = (price) => {
-    const priceProduct = productInfo.new_price;
+    const priceProduct = price;
     // Sử dụng phương thức replace để thêm dấu chấm hàng nghìn
     return priceProduct.replace(/\B(?=(\d{3})+(?!\d))/g, ".");
   }
 
   const formatOldPrice = (price) => {
-    const priceProduct = productInfo.old_price;
+    const priceProduct = price;
     // Sử dụng phương thức replace để thêm dấu chấm hàng nghìn
     return priceProduct.replace(/\B(?=(\d{3})+(?!\d))/g, ".");
   }
@@ -68,9 +87,9 @@ function ProductInfo({ productInfo }) {
             </div>
 
             <div className="product-info-quantity">
-              <button><i className="bx bx-minus"></i></button>
-              <p style={{fontSize: '20px'}}>1</p>
-              <button><i className="bx bx-plus"></i></button>
+              <button onClick={handleDecrementQuantity}><i className="bx bx-minus"></i></button>
+              <p style={{fontSize: '20px'}}>{quantity}</p>
+              <button onClick={handleIncrementQuantity}><i className="bx bx-plus"></i></button>
             </div>
 
             <button className="add-to-cart-btn" onClick={() => handleAddToCart()} >THÊM VÀO GIỎ HÀNG</button>

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./Tutorial.css";
 import bannerTutorial from '../../assets/images/bannerTutorial.png'
 import step1 from '../../assets/images/step1.png'
@@ -9,6 +9,10 @@ import step5 from '../../assets/images/step5.png'
 import step6 from '../../assets/images/step6.png'
 
 function Tutorial(props) {
+  useEffect(() => {
+    document.title = 'Hướng dẫn mua - Vật Vờ Shop'
+  }, [])
+
   return (
     <div className="tutorial">
       <div className="banner-tutorial">

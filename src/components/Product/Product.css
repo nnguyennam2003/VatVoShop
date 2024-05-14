@@ -8,6 +8,7 @@
 
 .prod-img {
     width: 100%;
+    min-height: 413.33px;
     border-radius: 10px;
     overflow: hidden;
     transition: .2s ease;

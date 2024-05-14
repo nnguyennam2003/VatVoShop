@@ -3,6 +3,9 @@ import "./PlusProduct.css";
 import { Link } from "react-router-dom";
 
 function PlusProduct({ id, name, newPrice, oldPrice, image }) {
+  const formattedNewPrice = Number(newPrice).toLocaleString('vi-VN');
+  const formattedOldPrice = Number(oldPrice).toLocaleString('vi-VN');
+  
   return (
     <Link to={`/productDetail/${id}`} style={{ textDecoration: "none" }}>
       <div className="plusProduct">
@@ -11,7 +14,7 @@ function PlusProduct({ id, name, newPrice, oldPrice, image }) {
         </div>
         <p className="plus-name">{name}</p>
         <p className="plus-new-price">
-          {newPrice}₫ <span className="plus-old-price">{oldPrice}₫</span>
+          {formattedNewPrice}₫ <span className="plus-old-price">{formattedOldPrice}₫</span>
         </p>
       </div>
     </Link>

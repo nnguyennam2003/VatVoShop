@@ -8,6 +8,10 @@ import UltraProduct from "../../components/UltraProduct";
 import Slide from "./components/Carousel/Slide";
 
 function Home(props) {
+  useEffect(() => {
+    document.title = 'Vật Vờ Shop'
+  }, [])
+
   const [plusProduct, setPlusProduct] = useState([]);
   const [ultraProduct, setUltraProduct] = useState([]);
 

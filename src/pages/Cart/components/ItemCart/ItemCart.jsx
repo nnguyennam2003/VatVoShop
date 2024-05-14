@@ -1,10 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import "./ItemCart.css";
 import Swal from "sweetalert2";
+import { updateQuantity } from "../../../../redux/slice/cartSlice";
+import { useDispatch } from "react-redux";
 
-function ItemCart({ image, name, price, quantity, onRemove }) {
+function ItemCart({id, image, name, price, quantity, size, onRemove }) {
+  const [ quantityItem, setQuantityItem ] = useState(quantity)
+  const dispatch = useDispatch()
   const formattedPrice = Number(price).toLocaleString('vi-VN');
-
+  const totalPrice = (price * quantityItem).toLocaleString('vi-VN');
+  
   const handleRemoveFromCart = () => {
     Swal.fire({
       title: `Bạn có chắc muốn xóa ${name}?`,
@@ -19,14 +24,29 @@ function ItemCart({ image, name, price, quantity, onRemove }) {
       if (result.isConfirmed) {
         onRemove();
         Swal.fire({
-          title: "Deleted!",
-          text: "Your file has been deleted.",
+          title: "Đã xóa!",
+          text: "Sản phẩm đã được xóa khỏi giỏ hàng.",
           icon: "success",
           confirmButtonColor: "#4FED66"
         });
       }
     });
   };
+
+  const handleIncrementQuantity = () => {
+    const newQuantity = quantityItem + 1;
+    setQuantityItem(newQuantity);
+    dispatch(updateQuantity({ id, quantity: newQuantity }));
+  }
+
+  const handleDecrementQuantity = () => {
+    if (quantityItem > 1) {
+      const newQuantity = quantityItem - 1;
+      setQuantityItem(newQuantity);
+      dispatch(updateQuantity({ id, quantity: newQuantity }));
+    }
+  };
+
 
   return (
     <div className="item-cart">
@@ -39,21 +59,21 @@ function ItemCart({ image, name, price, quantity, onRemove }) {
       </div>
       <div className="item-cart-info">
         <h3>{name}</h3>
-        <span>Trắng,S</span>
+        <span>Kích thước: {size}</span>
       </div>
       <div className="item-cart-quantity">
         <div className="action-quantity">
-          <button>
+          <button onClick={handleDecrementQuantity}>
             <i className="bx bx-minus"></i>
           </button>
-          <p className="quantity">{quantity}</p>
-          <button>
+          <p className="quantity">{quantityItem}</p>
+          <button onClick={handleIncrementQuantity}>
             <i className="bx bx-plus"></i>
           </button>
         </div>
       </div>
       <div className="item-cart-price">{formattedPrice}₫</div>
-      <div className="item-cart-total">{formattedPrice}₫</div>
+      <div className="item-cart-total">{totalPrice}₫</div>
     </div>
   );
 }

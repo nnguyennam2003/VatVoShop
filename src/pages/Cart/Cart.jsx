@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./Cart.css";
 import ItemCart from "./components/ItemCart";
 import { useNavigate } from "react-router-dom";
@@ -9,6 +9,10 @@ function Cart() {
   const navigate = useNavigate();
   const cartProductSelector = useSelector((state) => state.cart.ListCart);
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    document.title = `Giỏ hàng ${`${cartProductSelector.length === 0 ? '' : `(${cartProductSelector.length})`}`} - Vật Vờ Shop`
+  }, [cartProductSelector])
 
   const handleRemoveFromCart = (productId) => {
     // Gửi thông tin sản phẩm cần xóa đến reducer
@@ -28,7 +32,7 @@ function Cart() {
       {cartProductSelector.length > 0 && (
         <div className="title-cart">
           <h2>
-            <span>{cartProductSelector.length}</span> sản phẩm trong giỏ hàng
+            <span>Có {cartProductSelector.length}</span> sản phẩm trong giỏ hàng của bạn
           </h2>
         </div>
       )}
@@ -53,11 +57,13 @@ function Cart() {
           cartProductSelector.map((item, index) => (
             <ItemCart
               key={index}
+              id={item.id}
               image={item.image}
               name={item.name}
               price={item.new_price}
               quantity={item.quantity}
               onRemove={() => handleRemoveFromCart(item.id)}
+              size={item.size}
             />
           ))
         )}
