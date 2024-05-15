@@ -14,9 +14,9 @@ function Cart() {
     document.title = `Giỏ hàng ${`${cartProductSelector.length === 0 ? '' : `(${cartProductSelector.length})`}`} - Vật Vờ Shop`
   }, [cartProductSelector])
 
-  const handleRemoveFromCart = (productId) => {
+  const handleRemoveFromCart = (productId, productSize) => {
     // Gửi thông tin sản phẩm cần xóa đến reducer
-    dispatch(removeToCart({ id: productId }));
+    dispatch(removeToCart({ id: productId, size: productSize }));
   };
 
   const calculateTotalPrice = () => {
@@ -62,7 +62,7 @@ function Cart() {
               name={item.name}
               price={item.new_price}
               quantity={item.quantity}
-              onRemove={() => handleRemoveFromCart(item.id)}
+              onRemove={() => handleRemoveFromCart(item.id, item.size)}
               size={item.size}
             />
           ))

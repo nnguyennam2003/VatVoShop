@@ -4,4 +4,8 @@ const getAllProduct = () => {
     return instance.get('products')
 }
 
-export { getAllProduct }
+const getProductById = (productId) => { // Thêm tham số productId
+    return instance.get(`products/${productId}`); // Gọi API để lấy thông tin của sản phẩm cụ thể
+}
+
+export { getAllProduct, getProductById }

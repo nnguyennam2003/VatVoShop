@@ -1,7 +1,9 @@
 import axios from "axios";
 
+//const apiLocal = "http://localhost:8000/" Thay vào dòng 6 khi api render bị sập hoặc đang chạy với môi trường start-dev
+const apiRenderServer = "https://data-vatvoshop.onrender.com/";
 const instance = axios.create({
-  baseURL: "http://localhost:8000/",
+  baseURL: apiRenderServer,
 });
 
 instance.interceptors.response.use(
