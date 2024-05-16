@@ -1,0 +1,10 @@
+.headerMobile {
+    display: none;
+    z-index: 999 !important;
+}
+
+@media (max-width: 390px) {
+    .headerMobile {
+        display: block;
+    }
+}

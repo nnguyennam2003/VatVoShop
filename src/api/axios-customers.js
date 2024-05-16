@@ -1,7 +1,7 @@
 import axios from "axios";
 
 //const apiLocal = "http://localhost:8000/" Thay vào dòng 6 khi api render bị sập hoặc đang chạy với môi trường start-dev
-const apiRenderServer = "https://data-vatvoshop.onrender.com/";
+const apiRenderServer = "https://data-vat-vo-shop-vercel.vercel.app/";
 const instance = axios.create({
   baseURL: apiRenderServer,
 });
