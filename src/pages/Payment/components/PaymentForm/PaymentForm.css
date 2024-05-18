@@ -1,0 +1,100 @@
+.payment-form {
+    padding: 0 32px 64px 32px;
+    display: flex;
+    flex-direction: column;
+    background-color: #fff;
+}
+
+.payment-form-header {
+    width: 586px;
+    height: auto;
+}
+
+.payment-form-header-logo {
+    width: 100px;
+    height: auto;
+    margin: 14px auto 0 auto;
+}
+
+.payment-form-header-logo img {
+    width: 100%;
+}
+
+.payment-form-header-breadcrumb {
+    margin-top: 32px;
+    text-align: center;
+    font-size: 16px;
+    letter-spacing: 0.4px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #616161;
+    border-bottom: 1px #616161 solid;
+    padding-bottom: 32px;
+}
+
+.payment-form-header-breadcrumb span {
+    font-size: 24px;
+    margin: 0 10px;
+}
+
+.payment-form-field {
+    margin-top: 40px;
+}
+
+.payment-form-field h1{
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.payment-form-field input {
+    width: 100%;
+    background: #E6E6E6;
+    border: none;
+    outline: none;
+    padding: 18px 16px;
+    font-size: 17px;
+}
+
+.form-address {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.payment-order-confirm {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 48px;
+}
+
+.payment-order-confirm p {
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+    color: #616161;
+    cursor: pointer;
+}
+
+.payment-order-confirm p:hover {
+    color: #000;
+}
+
+.payment-order-confirm p span {
+    font-size: 24px;
+    margin-right: 8px;
+}
+
+.payment-order-confirm button {
+    font-size: 20px;
+    font-weight: bold;
+    padding: 16px 24px;
+    border: none;
+    border-radius: 68px;
+    background-color: #4FED66;
+    cursor: pointer;
+}
+
+.payment-order-confirm button:hover {
+    opacity: 0.8;
+}

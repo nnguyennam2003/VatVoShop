@@ -1,0 +1,14 @@
+.payment {
+    background: linear-gradient(90deg, #FFF, #F5F5F5);
+}
+
+.payment-container {
+    margin: 0 auto;
+    padding: 0 32px;
+    width: 1180px;
+    display: flex;
+}
+
+
+
+

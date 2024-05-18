@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import "./Cart.css";
 import ItemCart from "./components/ItemCart";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { removeToCart } from "../../redux/slice/cartSlice";
 
@@ -83,7 +83,7 @@ function Cart() {
           <button onClick={() => navigate("/products")}>
             Tiếp tục mua hàng
           </button>
-          <button>Thanh toán</button>
+          <Link to={'/payment'}><button>Thanh toán</button></Link>
         </div>
       )}
     </div>

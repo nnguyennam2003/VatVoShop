@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useLocation } from "react-router-dom";
 import "./App.css";
 
 import Header from "./components/Header";
@@ -8,12 +8,15 @@ import Footer from "./components/Footer";
 import Products from "./pages/Products";
 import Cart from "./pages/Cart";
 import ProductDetail from "./pages/ProductDetail";
+import Payment from "./pages/Payment";
 
 function App() {
+  const location = useLocation()
+  const isPaymentPage = location.pathname === '/payment'
   return (
     <div className="App">
-      <Header />
-      <div className="page">
+      {!isPaymentPage && <Header />}
+      {!isPaymentPage && <div className="page">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/tutorial" element={<Tutorial />} />
@@ -21,8 +24,9 @@ function App() {
           <Route path="/cart" element={<Cart />} />
           <Route path="/productDetail/:productDetailId" element={<ProductDetail />} />
         </Routes>
-      </div>
-      <Footer />
+      </div>}
+      {!isPaymentPage && <Footer />}
+      {isPaymentPage && <Payment />}
     </div>
 
   );
