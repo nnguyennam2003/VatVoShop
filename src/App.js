@@ -9,6 +9,7 @@ import Products from "./pages/Products";
 import Cart from "./pages/Cart";
 import ProductDetail from "./pages/ProductDetail";
 import Payment from "./pages/Payment";
+import PageNotFound from "./pages/PageNotFound";
 
 function App() {
   const location = useLocation()
@@ -23,6 +24,7 @@ function App() {
           <Route path="/products" element={<Products />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/productDetail/:productDetailId" element={<ProductDetail />} />
+          <Route path="*" element={<PageNotFound />} />
         </Routes>
       </div>}
       {!isPaymentPage && <Footer />}

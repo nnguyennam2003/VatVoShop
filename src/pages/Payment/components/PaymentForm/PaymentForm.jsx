@@ -27,19 +27,19 @@ function PaymentForm(props) {
       </div>
       <div className="payment-form-field">
         <h1>Địa chỉ giao hàng</h1>
-        <div className="form-address">
+        <form className="form-address">
           <input type="text" placeholder="Tên đầy đủ" />
           <input type="text" placeholder="Tên đường" />
           <input type="text" placeholder="Số nhà, căn hộ (không bắt buộc)" />
           <SelectCountry />
           <input type="number" placeholder="Số điện thoại" />
-        </div>
+        </form>
       </div>
       <div className="payment-order-confirm">
         <p onClick={backToCartPage}>
           <span>&lt;</span> Trở lại giỏ hàng
         </p>
-        <button>Tiếp tục đến giao hàng &#8594;</button>
+        <button type="submit">Tiếp tục đến giao hàng &#8594;</button>
       </div>
     </div>
   );
