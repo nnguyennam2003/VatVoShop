@@ -63,7 +63,7 @@ function Home(props) {
       </div>
 
       <section className="title-plus">
-        <h1>PHIÊN BẢN PLUS</h1>
+        <h1>PHIÊN BẢN PLUSss</h1>
         <p>
           Những mẫu áo thun được <strong>thiết kế độc quyền</strong> dành cho
           fan của Vật Vờ Studio và anh em đam mê công nghệ.
