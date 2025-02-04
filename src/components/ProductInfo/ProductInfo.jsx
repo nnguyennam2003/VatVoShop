@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./ProductInfo.css";
 import LoadingProductInfo from "../LoadingProductInfo";
 import { useDispatch } from 'react-redux'
-import { addToCart, setCart } from "../../redux/slice/cartSlice";
+import { setCart } from "../../redux/slice/cartSlice";
 import AlertSweet from "./components/AlertSweet";
 import { addToCartBackend } from "../../services/CartService/CartService";
 

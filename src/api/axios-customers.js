@@ -1,7 +1,7 @@
 import axios from "axios";
 
 // const apiLocal = "http://localhost:8000/" //Thay vào dòng 6 khi api render bị sập hoặc đang chạy với môi trường start-dev
-const apiRenderServer = "http://localhost:8001/api";
+const apiRenderServer = process.env.REACT_APP_API_URL || "http://localhost:8001/api";
 const instance = axios.create({
   baseURL: apiRenderServer,
 });
