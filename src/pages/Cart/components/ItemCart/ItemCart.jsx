@@ -3,13 +3,17 @@ import "./ItemCart.css";
 import Swal from "sweetalert2";
 import { updateQuantity } from "../../../../redux/slice/cartSlice";
 import { useDispatch } from "react-redux";
+import { updateQuantityCart } from "../../../../services/CartService/CartService";
 
-function ItemCart({id, image, name, price, quantity, size, onRemove }) {
-  const [ quantityItem, setQuantityItem ] = useState(quantity)
+function ItemCart({ id, productId, image, name, price, quantity, size, onRemove }) {
+  const [quantityItem, setQuantityItem] = useState(quantity)
+  const [updateTimeout, setUpdateTimeout] = useState(null)
   const dispatch = useDispatch()
   const formattedPrice = Number(price).toLocaleString('vi-VN');
   const totalPrice = (price * quantityItem).toLocaleString('vi-VN');
-  
+  const userId = localStorage.getItem('userId')
+  console.log(id)
+
   const handleRemoveFromCart = () => {
     Swal.fire({
       title: `Bạn có chắc muốn xóa ${name}?`,
@@ -33,17 +37,37 @@ function ItemCart({id, image, name, price, quantity, size, onRemove }) {
     });
   };
 
+  const handleUpdateQuantityAPI = (quantity) => {
+
+    if (updateTimeout) {
+      clearTimeout(updateTimeout);
+    }
+
+    const newTimeout = setTimeout(async () => {
+      try {
+        await updateQuantityCart({ userId, productId, quantity });
+      } catch (error) {
+        console.error("Error updating quantity:", error);
+      }
+    }, 700);
+
+    setUpdateTimeout(newTimeout);
+  };
+
   const handleIncrementQuantity = () => {
-    const newQuantity = quantityItem + 1;
-    setQuantityItem(newQuantity);
-    dispatch(updateQuantity({ id, quantity: newQuantity }));
+    const newQuantity = quantityItem + 1
+    setQuantityItem(newQuantity)
+    dispatch(updateQuantity({ id, quantity: newQuantity }))
+
+    handleUpdateQuantityAPI(newQuantity)
   }
 
   const handleDecrementQuantity = () => {
     if (quantityItem > 1) {
-      const newQuantity = quantityItem - 1;
-      setQuantityItem(newQuantity);
-      dispatch(updateQuantity({ id, quantity: newQuantity }));
+      const newQuantity = quantityItem - 1
+        setQuantityItem(newQuantity)
+        dispatch(updateQuantity({ id, quantity: newQuantity }))
+        handleUpdateQuantityAPI(newQuantity)
     }
   };
 
@@ -63,7 +87,7 @@ function ItemCart({id, image, name, price, quantity, size, onRemove }) {
       </div>
       <div className="item-cart-quantity">
         <div className="action-quantity">
-          <button onClick={handleDecrementQuantity}>
+          <button onClick={handleDecrementQuantity} disabled={quantityItem <= 1} > 
             <i className="bx bx-minus"></i>
           </button>
           <p className="quantity">{quantityItem}</p>

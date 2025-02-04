@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from "react";
 import "./Home.css";
 import bannerHome from "../../assets/images/bannerhome.png";
-import PlusProduct from "../../components/PlusProduct";
-import { getPlusProduct } from "../../services/plusProduct";
-import { getUltraProduct } from "../../services/ultraProduct";
-import UltraProduct from "../../components/UltraProduct";
 import Slide from "./components/Carousel/Slide";
+import { getAllProduct } from "../../services/ProductService/products";
+import Product from "../../components/Product";
 
 function Home(props) {
   useEffect(() => {
@@ -15,29 +13,22 @@ function Home(props) {
   const [plusProduct, setPlusProduct] = useState([]);
   const [ultraProduct, setUltraProduct] = useState([]);
 
-  const fetchDataPlusProduct = async () => {
+  const fetchDataProduct = async () => {
     try {
-      const res = await getPlusProduct();
-      // console.log(res);
-      setPlusProduct(res);
+      const res = await getAllProduct();
+      const filteredPlusProducts = res.filter(product => product.version === "plus");
+      setPlusProduct(filteredPlusProducts)
+
+      const filteredUltraProducts = res.filter(product => product.version === "ultra");
+      setUltraProduct(filteredUltraProducts)
     } catch (err) {
       console.error(err);
     }
   };
 
-  const fetchDataUltraProduct = async () => {
-    try {
-      const res = await getUltraProduct();
-      // console.log(res);
-      setUltraProduct(res);
-    } catch (err) {
-      console.error(err);
-    }
-  };
 
   useEffect(() => {
-    fetchDataPlusProduct();
-    fetchDataUltraProduct();
+    fetchDataProduct();
   }, []);
 
   return (
@@ -72,7 +63,7 @@ function Home(props) {
           <strong>Chất liệu Cotton 100% chống xù của Mehub Signature</strong>
         </p>
         <p>
-          <strong style={{color: 'red'}}>
+          <strong style={{ color: 'red' }}>
             *Lưu ý: Size áo của hai phiên bản sẽ khác nhau, bạn hãy xem kỹ nhé!
           </strong>
         </p>
@@ -80,9 +71,9 @@ function Home(props) {
 
       <section className="prod-plus">
         {plusProduct.map((plus, index) => (
-          <PlusProduct
+          <Product
             key={index}
-            id={plus.id}
+            id={plus._id}
             name={plus.name}
             newPrice={plus.new_price}
             oldPrice={plus.old_price}
@@ -108,7 +99,7 @@ function Home(props) {
           </strong>
         </p>
         <p>
-          <strong style={{color: 'red'}}>
+          <strong style={{ color: 'red' }}>
             *Lưu ý: Size áo của hai phiên bản sẽ khác nhau, bạn hãy xem kỹ nhé!
           </strong>
         </p>
@@ -116,9 +107,9 @@ function Home(props) {
 
       <section className="prod-ultra">
         {ultraProduct.map((ultra, index) => (
-          <UltraProduct
+          <Product
             key={index}
-            id={ultra.id}
+            id={ultra._id}
             name={ultra.name}
             newPrice={ultra.new_price}
             oldPrice={ultra.old_price}

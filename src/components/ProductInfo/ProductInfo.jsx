@@ -2,10 +2,12 @@ import React, { useEffect, useState } from "react";
 import "./ProductInfo.css";
 import LoadingProductInfo from "../LoadingProductInfo";
 import { useDispatch } from 'react-redux'
-import { addToCart } from "../../redux/slice/cartSlice";
+import { addToCart, setCart } from "../../redux/slice/cartSlice";
 import AlertSweet from "./components/AlertSweet";
+import { addToCartBackend } from "../../services/CartService/CartService";
 
 function ProductInfo({ productInfo }) {
+  const userId = localStorage.getItem('userId')
   useEffect(() => {
     if (productInfo) {
       document.title = `${productInfo.name}`
@@ -23,8 +25,25 @@ function ProductInfo({ productInfo }) {
     setSize(sizeSelect)
   }
 
-  const handleAddToCart = () => {
-    dispatch(addToCart({...productInfo, quantity: quantity, size: size}))
+  const handleAddToCart = async () => {
+    // dispatch(addToCart({ ...productInfo, quantity: quantity, size: size }))
+    const cartItem = {
+      userId, // Gửi userId đi
+      productId: productInfo._id,
+      size: size, // Lấy từ UI
+      quantity: quantity,
+    }
+
+    try {
+      const response = await addToCartBackend(cartItem);
+
+      if (response) {
+        dispatch(setCart(response.cart));
+      }
+    } catch (error) {
+      console.error(error);
+    }
+
     setAlertSweet(true)
   }
 
@@ -46,13 +65,11 @@ function ProductInfo({ productInfo }) {
 
   const formatNewPrice = (price) => {
     const priceProduct = price;
-    // Sử dụng phương thức replace để thêm dấu chấm hàng nghìn
     return priceProduct.replace(/\B(?=(\d{3})+(?!\d))/g, ".");
   }
 
   const formatOldPrice = (price) => {
     const priceProduct = price;
-    // Sử dụng phương thức replace để thêm dấu chấm hàng nghìn
     return priceProduct.replace(/\B(?=(\d{3})+(?!\d))/g, ".");
   }
 
@@ -61,7 +78,7 @@ function ProductInfo({ productInfo }) {
       {productInfo ? (
         <div className="product-info">
           <div className="product-info-img">
-            <img src={productInfo.image} alt="img"/>
+            <img src={productInfo.image} alt="img" />
           </div>
 
           <div className="product-info-text">
@@ -88,12 +105,12 @@ function ProductInfo({ productInfo }) {
 
             <div className="product-info-quantity">
               <button onClick={handleDecrementQuantity}><i className="bx bx-minus"></i></button>
-              <p style={{fontSize: '20px'}}>{quantity}</p>
+              <p style={{ fontSize: '20px' }}>{quantity}</p>
               <button onClick={handleIncrementQuantity}><i className="bx bx-plus"></i></button>
             </div>
 
             <button className="add-to-cart-btn" onClick={() => handleAddToCart()} >THÊM VÀO GIỎ HÀNG</button>
-            {alertSweet && (<AlertSweet onclose={handleClose}/>)}
+            {alertSweet && (<AlertSweet onclose={handleClose} />)}
           </div>
         </div>
       ) : (

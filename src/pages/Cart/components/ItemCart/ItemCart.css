@@ -81,6 +81,11 @@
     color: #FFF;
 }
 
+.action-quantity button:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
 .action-quantity button i {
     font-size: 1.6rem;
 }

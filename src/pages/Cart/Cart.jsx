@@ -4,27 +4,41 @@ import ItemCart from "./components/ItemCart";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { removeToCart } from "../../redux/slice/cartSlice";
+import { removeFromCart } from "../../services/CartService/CartService";
 
 function Cart() {
   const navigate = useNavigate();
   const cartProductSelector = useSelector((state) => state.cart.ListCart);
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
+  const userId = localStorage.getItem('userId')
 
   useEffect(() => {
     document.title = `Giỏ hàng ${`${cartProductSelector.length === 0 ? '' : `(${cartProductSelector.length})`}`} - Vật Vờ Shop`
   }, [cartProductSelector])
 
-  const handleRemoveFromCart = (productId, productSize) => {
-    // Gửi thông tin sản phẩm cần xóa đến reducer
-    dispatch(removeToCart({ id: productId, size: productSize }));
+  const handleRemoveFromCart = async (productId, productSize) => {
+    const dataRemove = {
+      userId: userId,
+      productId: productId,
+      size: productSize
+    }
+
+    try {
+      const res = await removeFromCart(dataRemove)
+      if (res.message === "Product removed from cart successfully") {
+        dispatch(removeToCart({ productId, size: productSize }));
+      }
+    } catch (error) {
+      console.log(error)
+    }
   };
 
   const calculateTotalPrice = () => {
     let totalPrice = 0;
     cartProductSelector.forEach((product) => {
-      totalPrice += parseInt(product.new_price) * product.quantity;
+      totalPrice += parseInt(product.price) * product.quantity;
     });
-    return  totalPrice.toLocaleString('vi-VN');
+    return totalPrice.toLocaleString('vi-VN');
   };
 
   return (
@@ -57,12 +71,13 @@ function Cart() {
           cartProductSelector.map((item, index) => (
             <ItemCart
               key={index}
-              id={item.id}
+              id={item._id}
+              productId={item.productId}
               image={item.image}
               name={item.name}
-              price={item.new_price}
+              price={item.price}
               quantity={item.quantity}
-              onRemove={() => handleRemoveFromCart(item.id, item.size)}
+              onRemove={() => handleRemoveFromCart(item.productId, item.size)}
               size={item.size}
             />
           ))

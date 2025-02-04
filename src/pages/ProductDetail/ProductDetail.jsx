@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./ProductDetail.css";
-import { getProductById } from "../../services/products";
+import { getProductById } from "../../services/ProductService/products";
 import { useParams } from "react-router-dom";
 import ProductInfo from "../../components/ProductInfo";
 
@@ -19,8 +19,8 @@ function ProductDetail() {
       }
     }
 
-    getProductDetail() // Gọi hàm lấy chi tiết sản phẩm khi component được mount
-  }, [productDetailId]) // Thêm productDetailId vào dependency array để hàm được gọi lại khi productDetailId thay đổi
+    getProductDetail()
+  }, [productDetailId])
 
   return (
     <div>
@@ -30,19 +30,3 @@ function ProductDetail() {
 }
 
 export default ProductDetail;
-// const [ dataProducts , setDataProducts ] = useState([])
-
-// const getDataProducts = async () => {
-//     try {
-//         const res = await getAllProduct()
-//         setDataProducts(res)
-//     } catch (err) {
-//         console.error(err)
-//     }
-// }
-
-// useEffect(() => {
-//     getDataProducts()
-// }, [])
-
-// const productIf = dataProducts.find((e)=> e.id === productDetailId)
