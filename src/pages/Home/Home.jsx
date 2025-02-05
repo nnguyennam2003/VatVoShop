@@ -4,6 +4,7 @@ import bannerHome from "../../assets/images/bannerhome.png";
 import Slide from "./components/Carousel/Slide";
 import { getAllProduct } from "../../services/ProductService/products";
 import Product from "../../components/Product";
+import LoadingProducts from "../../components/LoadingProducts";
 
 function Home(props) {
   useEffect(() => {
@@ -12,15 +13,18 @@ function Home(props) {
 
   const [plusProduct, setPlusProduct] = useState([]);
   const [ultraProduct, setUltraProduct] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   const fetchDataProduct = async () => {
     try {
       const res = await getAllProduct();
-      const filteredPlusProducts = res.filter(product => product.version === "plus");
-      setPlusProduct(filteredPlusProducts)
-
-      const filteredUltraProducts = res.filter(product => product.version === "ultra");
-      setUltraProduct(filteredUltraProducts)
+      if (res) {
+        const filteredPlusProducts = res.filter(product => product.version === "plus");
+        setPlusProduct(filteredPlusProducts)
+        setIsLoading(false)
+        const filteredUltraProducts = res.filter(product => product.version === "ultra");
+        setUltraProduct(filteredUltraProducts)
+      }
     } catch (err) {
       console.error(err);
     }
@@ -70,7 +74,7 @@ function Home(props) {
       </section>
 
       <section className="prod-plus">
-        {plusProduct.map((plus, index) => (
+        {isLoading ? <LoadingProducts /> : (plusProduct.map((plus, index) => (
           <Product
             key={index}
             id={plus._id}
@@ -79,7 +83,8 @@ function Home(props) {
             oldPrice={plus.old_price}
             image={plus.image}
           />
-        ))}
+        )))
+        }
       </section>
 
       <section className="slide">
@@ -106,7 +111,7 @@ function Home(props) {
       </section>
 
       <section className="prod-ultra">
-        {ultraProduct.map((ultra, index) => (
+        {isLoading ? <LoadingProducts /> : (ultraProduct.map((ultra, index) => (
           <Product
             key={index}
             id={ultra._id}
@@ -115,7 +120,7 @@ function Home(props) {
             oldPrice={ultra.old_price}
             image={ultra.image}
           />
-        ))}
+        )))}
       </section>
     </div>
   );

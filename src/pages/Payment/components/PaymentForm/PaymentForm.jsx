@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import SelectCountry from "../SelectCountry";
 import './PaymentForm.css'
 
-function PaymentForm(props) {
+function PaymentForm({ userInfo }) {
   const navigate = useNavigate();
 
   const backToCartPage = () => {
@@ -23,16 +23,16 @@ function PaymentForm(props) {
       </div>
       <div className="payment-form-field">
         <h1>Thông tin liên lạc</h1>
-        <input type="email" placeholder="Địa chỉ Email" />
+        <input type="email" placeholder="Địa chỉ Email" value={userInfo ? userInfo.email : ''} disabled />
       </div>
       <div className="payment-form-field">
         <h1>Địa chỉ giao hàng</h1>
         <form className="form-address">
-          <input type="text" placeholder="Tên đầy đủ" />
+          <input type="text" placeholder="Tên đầy đủ" value={userInfo ? userInfo.fullName : ''} disabled />
           <input type="text" placeholder="Tên đường" />
           <input type="text" placeholder="Số nhà, căn hộ (không bắt buộc)" />
-          <SelectCountry />
-          <input type="number" placeholder="Số điện thoại" />
+          {/* <SelectCountry /> */}
+          <input type="number" placeholder="Số điện thoại" value={userInfo ? userInfo.phoneNumber : ''} disabled />
         </form>
       </div>
       <div className="payment-order-confirm">

@@ -5,9 +5,12 @@ import { useDispatch } from 'react-redux'
 import { setCart } from "../../redux/slice/cartSlice";
 import AlertSweet from "./components/AlertSweet";
 import { addToCartBackend } from "../../services/CartService/CartService";
+import Swal from "sweetalert2";
 
 function ProductInfo({ productInfo }) {
   const userId = localStorage.getItem('userId')
+  const token = localStorage.getItem('token')
+
   useEffect(() => {
     if (productInfo) {
       document.title = `${productInfo.name}`
@@ -26,24 +29,30 @@ function ProductInfo({ productInfo }) {
   }
 
   const handleAddToCart = async () => {
-    const cartItem = {
-      userId,
-      productId: productInfo._id,
-      size: size,
-      quantity: quantity,
-    }
-
-    try {
-      const response = await addToCartBackend(cartItem)
-
-      if (response) {
-        dispatch(setCart(response.cart))
+    if (token) {
+      const cartItem = {
+        userId,
+        productId: productInfo._id,
+        size: size,
+        quantity: quantity,
       }
-    } catch (error) {
-      console.error(error)
-    }
 
-    setAlertSweet(true)
+      try {
+        const response = await addToCartBackend(cartItem)
+        if (response) {
+          dispatch(setCart(response.cart))
+          setAlertSweet(true)
+        }
+      } catch (error) {
+        console.error(error)
+      }
+    } else {
+      Swal.fire({
+        icon: "error",
+        title: "Ồ... Bạn chưa đăng nhập",
+        text: "Hãy đăng nhập để có thể tiến hành mua hàng nha!",
+      });
+    }
   }
 
   const handleClose = () => {

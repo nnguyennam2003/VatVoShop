@@ -18,7 +18,6 @@ function Header() {
     const handleLogout = () => {
         Swal.fire({
             title: `Bạn có chắc muốn đăng xuất?`,
-            text: "Bạn có thể thêm lại sản phẩm này bất cứ khi nào",
             icon: "warning",
             showCancelButton: true,
             confirmButtonColor: "#3085d6",
