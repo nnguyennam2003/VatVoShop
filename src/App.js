@@ -45,6 +45,9 @@ function App() {
     if (role === 'admin' && !location.pathname.startsWith('/admin')) {
       navigate('/admin/dashboard');
     }
+    if (!userId && location.pathname === "/payment") {
+      navigate("/login");
+    }
   }, [role, location.pathname, navigate, userId]);
 
   return (
