@@ -22,7 +22,6 @@ export default function ProductsManage() {
 
   const handleAddProduct = async (e) => {
     e.preventDefault()
-    // setIsLoading(true)
     try {
       const res = await addNewProduct({ name: name, new_price: newPrice, old_price: oldPrice, image: imageFile, version: version })
       console.log(res)

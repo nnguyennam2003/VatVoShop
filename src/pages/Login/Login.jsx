@@ -2,10 +2,10 @@ import React, { useState } from 'react'
 import { login } from '../../services/AuthService/authService'
 import { useDispatch } from 'react-redux';
 import { setLoading, setLoginFailure, setLoginSuccess } from '../../redux/slice/authSlice';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import { jwtDecode } from "jwt-decode";
-
+import './Login.css'
 export default function Login() {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
@@ -45,12 +45,22 @@ export default function Login() {
     }
 
     return (
-        <div>
-            <form onSubmit={handleLogin}>
-                <input type="text" placeholder='Username' value={email} onChange={(e) => setEmail(e.target.value)} />
-                <input type="password" placeholder='Password' value={password} onChange={(e) => setPassword(e.target.value)} />
-                <button type='submit'>Đăng nhập</button>
-            </form>
+        <div className='login-page'>
+            <div className='login-form'>
+                <h1>Đăng nhập</h1>
+                <form onSubmit={handleLogin}>
+                    <div className='input-item'>
+                        <label>Email</label>
+                        <input type="text" value={email} onChange={(e) => setEmail(e.target.value)} />
+                    </div>
+                    <div className='input-item'>
+                        <label>Password</label>
+                        <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+                    </div>
+                    <button type='submit'>Đăng nhập</button>
+                    <div>Bạn chưa có tài khoản? <Link to={'/register'}>Đăng ký</Link></div>
+                </form>
+            </div>
         </div>
     )
 }

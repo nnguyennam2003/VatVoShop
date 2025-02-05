@@ -12,7 +12,7 @@ function ProductDetail() {
   useEffect(() => {
     const getProductDetail = async () => {
       try {
-        const res = await getProductById(productDetailId); // Gọi API để lấy thông tin của sản phẩm cụ thể
+        const res = await getProductById(productDetailId)
         setProductInfo(res)
       } catch (err) {
         console.error(err)

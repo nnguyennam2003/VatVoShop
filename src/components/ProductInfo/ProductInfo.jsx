@@ -26,22 +26,21 @@ function ProductInfo({ productInfo }) {
   }
 
   const handleAddToCart = async () => {
-    // dispatch(addToCart({ ...productInfo, quantity: quantity, size: size }))
     const cartItem = {
-      userId, // Gửi userId đi
+      userId,
       productId: productInfo._id,
-      size: size, // Lấy từ UI
+      size: size,
       quantity: quantity,
     }
 
     try {
-      const response = await addToCartBackend(cartItem);
+      const response = await addToCartBackend(cartItem)
 
       if (response) {
-        dispatch(setCart(response.cart));
+        dispatch(setCart(response.cart))
       }
     } catch (error) {
-      console.error(error);
+      console.error(error)
     }
 
     setAlertSweet(true)
@@ -52,13 +51,13 @@ function ProductInfo({ productInfo }) {
   }
 
   const handleIncrementQuantity = () => {
-    setQuantity(quantity + 1);
+    setQuantity(quantity + 1)
 
   }
 
   const handleDecrementQuantity = () => {
     if (quantity > 1) {
-      setQuantity(quantity - 1);
+      setQuantity(quantity - 1)
     }
   };
 

@@ -31,7 +31,7 @@ function Products(props) {
       <h1>Chúng tôi có</h1>
       <div className="prod-wrapper">
         {isLoading ? (
-          <LoadingProducts /> // Hiển thị LoadingProducts khi isLoading là true
+          <LoadingProducts />
         ) : (
           productData.map((prod, index) => (
             <Product

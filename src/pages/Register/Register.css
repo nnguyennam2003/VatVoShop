@@ -1,0 +1,42 @@
+.register-page {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+}
+
+.register-form {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 500px;
+  padding: 30px;
+  border-radius: 10px;
+}
+.register-form h1 {
+    text-align: center;
+    font-size: 50px;
+}
+.register-form form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.register-form form button{
+    padding: 10px;
+    font-size: 18px;
+    border-radius: 8px;
+    background-color: transparent;
+    border: none;
+    background-color: #BADC92;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+
+.register-form form .input-item {
+  display: flex;
+  gap: 8px;
+  flex-direction: column;
+}

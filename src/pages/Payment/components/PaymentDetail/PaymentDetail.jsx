@@ -7,7 +7,7 @@ function PaymentDetail(props) {
   const calculateTotalPrice = () => {
     let totalPrice = 0;
     cartProductSelector.forEach((product) => {
-      totalPrice += parseInt(product.new_price) * product.quantity;
+      totalPrice += parseInt(product.price) * product.quantity;
     });
     return  totalPrice.toLocaleString('vi-VN');
   };
@@ -21,7 +21,7 @@ function PaymentDetail(props) {
           </div>
           <p>{item.name}</p>
           <div className="payment-detail-ite-quantity">{item.quantity}</div>
-          <div className="payment-detail-ite-price">{Number(item.new_price).toLocaleString('vi-VN')}₫</div>
+          <div className="payment-detail-ite-price">{Number(item.price).toLocaleString('vi-VN')}₫</div>
         </div>
       ))}
 

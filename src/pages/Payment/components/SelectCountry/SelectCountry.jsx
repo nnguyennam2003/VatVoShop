@@ -1,25 +1,25 @@
-import React, { useEffect, useState } from "react";
-import "./SelectCountry.css";
+import React, { useEffect, useState } from "react"
+import "./SelectCountry.css"
 import {
   getAllCity,
   getAllDistrict,
   getAllWard,
-} from "../../../../services/province";
+} from "../../../../services/province"
 
 function SelectCountry(props) {
-  const [citys, setCitys] = useState([]);
-  const [selectedCity, setSelectedCity] = useState("");
-  const [districts, setDistricts] = useState([]);
-  const [selectedDistrict, setSelectedDistrict] = useState("");
-  const [wards, setWards] = useState([]);
+  const [citys, setCitys] = useState([])
+  const [selectedCity, setSelectedCity] = useState("")
+  const [districts, setDistricts] = useState([])
+  const [selectedDistrict, setSelectedDistrict] = useState("")
+  const [wards, setWards] = useState([])
 
   useEffect(() => {
     const getCityData = async () => {
       try {
-        const res = await getAllCity();
-        setCitys(res.data.results);
+        const res = await getAllCity()
+        setCitys(res.data.results)
       } catch (err) {
-        console.error(err);
+        console.error(err)
       }
     };
 
@@ -29,47 +29,47 @@ function SelectCountry(props) {
   useEffect(() => {
     const getDistrictData = async () => {
       try {
-        const res = await getAllDistrict(selectedCity);
-        setDistricts(res.data.results);
-        setSelectedDistrict(""); // Reset selected district
-        setWards([]); // Reset wards when city changes
+        const res = await getAllDistrict(selectedCity)
+        setDistricts(res.data.results)
+        setSelectedDistrict("")
+        setWards([])
       } catch (err) {
-        console.error(err);
+        console.error(err)
       }
     };
 
     if (selectedCity) {
-      getDistrictData();
+      getDistrictData()
     } else {
-      setDistricts([]); // Reset districts if no city is selected
-      setWards([]); // Reset wards if no city is selected
+      setDistricts([])
+      setWards([])
     }
-  }, [selectedCity]);
+  }, [selectedCity])
 
   useEffect(() => {
     const getWardData = async () => {
       try {
-        const res = await getAllWard(selectedDistrict);
-        setWards(res.data.results);
+        const res = await getAllWard(selectedDistrict)
+        setWards(res.data.results)
       } catch (err) {
-        console.error(err);
+        console.error(err)
       }
     };
 
     if (selectedDistrict) {
-      getWardData();
+      getWardData()
     } else {
-      setWards([]); // Reset wards if no district is selected
+      setWards([])
     }
-  }, [selectedDistrict]);
+  }, [selectedDistrict])
 
   const handleChangeCity = (e) => {
-    setSelectedCity(e.target.value);
+    setSelectedCity(e.target.value)
   };
 
   const handleChangeDistrict = (e) => {
-    console.log(e.target.value);
-    setSelectedDistrict(e.target.value);
+    console.log(e.target.value)
+    setSelectedDistrict(e.target.value)
   };
 
   return (
@@ -104,4 +104,4 @@ function SelectCountry(props) {
   );
 }
 
-export default SelectCountry;
+export default SelectCountry
