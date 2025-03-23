@@ -1,6 +1,7 @@
 import React from "react";
 import './PaymentDetail.css'
 import { useSelector } from "react-redux";
+
 function PaymentDetail(props) {
   const cartProductSelector = useSelector((state) => state.cart.ListCart);
 

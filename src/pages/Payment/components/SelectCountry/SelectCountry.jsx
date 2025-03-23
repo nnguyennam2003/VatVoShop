@@ -6,18 +6,19 @@ import {
   getAllWard,
 } from "../../../../services/province"
 
-function SelectCountry(props) {
-  const [citys, setCitys] = useState([])
-  const [selectedCity, setSelectedCity] = useState("")
-  const [districts, setDistricts] = useState([])
-  const [selectedDistrict, setSelectedDistrict] = useState("")
-  const [wards, setWards] = useState([])
+function SelectCountry({ getAddress }) {
+  const [citys, setCitys] = useState([]);
+  const [selectedCity, setSelectedCity] = useState({ id: "", name: "" });
+  const [districts, setDistricts] = useState([]);
+  const [selectedDistrict, setSelectedDistrict] = useState({ id: "", name: "" });
+  const [wards, setWards] = useState([]);
+  const [selectedWard, setSelectedWard] = useState({ id: "", name: "" });
 
   useEffect(() => {
     const getCityData = async () => {
       try {
         const res = await getAllCity()
-        setCitys(res.data.results)
+        setCitys(res.data.data)
       } catch (err) {
         console.error(err)
       }
@@ -29,74 +30,92 @@ function SelectCountry(props) {
   useEffect(() => {
     const getDistrictData = async () => {
       try {
-        const res = await getAllDistrict(selectedCity)
-        setDistricts(res.data.results)
-        setSelectedDistrict("")
-        setWards([])
+        const res = await getAllDistrict(selectedCity.id)
+        setDistricts(res.data.data)
+        setSelectedDistrict({ id: "", name: "" });
+        setWards([]);
+        setSelectedWard({ id: "", name: "" });
       } catch (err) {
         console.error(err)
       }
     };
 
-    if (selectedCity) {
+    if (selectedCity.id) {
       getDistrictData()
     } else {
-      setDistricts([])
-      setWards([])
+      setDistricts([]);
+      setWards([]);
+      setSelectedWard({ id: "", name: "" });
     }
   }, [selectedCity])
 
   useEffect(() => {
     const getWardData = async () => {
       try {
-        const res = await getAllWard(selectedDistrict)
-        setWards(res.data.results)
+        const res = await getAllWard(selectedDistrict.id);
+        setWards(res.data.data);
+        setSelectedWard({ id: "", name: "" });
       } catch (err) {
-        console.error(err)
+        console.error(err);
       }
     };
 
-    if (selectedDistrict) {
-      getWardData()
+    if (selectedDistrict.id) {
+      getWardData();
     } else {
-      setWards([])
+      setWards([]);
+      setSelectedWard({ id: "", name: "" });
     }
   }, [selectedDistrict])
 
+  useEffect(() => {
+    getAddress({
+      city: selectedCity.name,
+      district: selectedDistrict.name,
+      ward: selectedWard.name,
+    });
+  }, [selectedCity, selectedDistrict, selectedWard]);
+
   const handleChangeCity = (e) => {
-    setSelectedCity(e.target.value)
+    const selectedOption = citys.find(city => city.id === e.target.value);
+    setSelectedCity(selectedOption ? { id: selectedOption.id, name: selectedOption.name } : { id: "", name: "" });
   };
 
   const handleChangeDistrict = (e) => {
-    console.log(e.target.value)
-    setSelectedDistrict(e.target.value)
+    const selectedOption = districts.find(district => district.id === e.target.value);
+    setSelectedDistrict(selectedOption ? { id: selectedOption.id, name: selectedOption.name } : { id: "", name: "" });
+  };
+
+  const handleChangeWard = (e) => {
+    const selectedOption = wards.find(ward => ward.id === e.target.value);
+    setSelectedWard(selectedOption ? { id: selectedOption.id, name: selectedOption.name } : { id: "", name: "" });
   };
 
   return (
     <div className="select-country">
-      <select name="" id="city" onChange={handleChangeCity}>
+      <select value={selectedCity.id} id="city" onChange={handleChangeCity}>
         <option value="">Chọn thành phố</option>
         {citys.map((city) => (
-          <option value={`${city.province_id}`} key={city.province_id}>
-            {city.province_name}
+          <option value={`${city.id}`} key={city.id}>
+            {city.name}
           </option>
         ))}
       </select>
 
-      <select name="" id="district" onChange={handleChangeDistrict}>
+      <select value={selectedDistrict.id} id="district" onChange={handleChangeDistrict} disabled={districts.length === 0}>
         <option value="">Chọn quận</option>
         {districts.map((district) => (
-          <option value={`${district.district_id}`} key={district.district_id}>
-            {district.district_name}
+          <option value={`${district.id}`} key={district.id}>
+            {district.name}
           </option>
         ))}
       </select>
 
-      <select name="" id="ward">
+      <select value={selectedWard.id} id="ward" onChange={handleChangeWard} disabled={wards.length === 0}>
         <option value="">Chọn phường</option>
         {wards.map((ward) => (
-          <option value={`${ward.ward_id}`} key={ward.ward_id}>
-            {ward.ward_name}
+          <option value={`${ward.id}`} key={ward.id}>
+            {ward.name}
           </option>
         ))}
       </select>

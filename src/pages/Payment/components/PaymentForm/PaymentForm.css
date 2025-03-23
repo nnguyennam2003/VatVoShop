@@ -65,7 +65,13 @@
 .payment-order-confirm {
     display: flex;
     justify-content: space-between;
+    align-items: flex-start;
     margin-top: 48px;
+}
+.payment-method-selection {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
 }
 
 .payment-order-confirm p {

@@ -6,6 +6,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import { jwtDecode } from "jwt-decode";
 import './Login.css'
+
 export default function Login() {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")

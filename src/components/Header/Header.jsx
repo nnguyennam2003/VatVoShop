@@ -68,6 +68,7 @@ function Header() {
                             <Link to={'/cart'} style={{ textDecoration: 'none', color: '#0c0c0c' }}><li>GIỎ HÀNG <span>{cartProductSelector.length}</span></li></Link>
                             <li style={{ marginLeft: '10px' }} onClick={handleLogout}>
                                 <LogoutOutlined style={{ margin: 'auto', width: '100%' }} />
+                                
                             </li>
                         </>
                     )

@@ -12,8 +12,7 @@ function ItemCart({ id, productId, image, name, price, quantity, size, onRemove 
   const formattedPrice = Number(price).toLocaleString('vi-VN');
   const totalPrice = (price * quantityItem).toLocaleString('vi-VN');
   const userId = localStorage.getItem('userId')
-  console.log(id)
-
+  
   const handleRemoveFromCart = () => {
     Swal.fire({
       title: `Bạn có chắc muốn xóa ${name}?`,
